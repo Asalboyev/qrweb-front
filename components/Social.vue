@@ -4,6 +4,7 @@
     class="mt-2 social-links flex justify-center max-w-[400px] mx-auto items-center sm:gap-x-12 gap-x-6 gap-y-6 flex-wrap"
   >
     <NuxtLink
+      v-if="social?.email"
       :href="`mailto:${social?.email}`"
       class="flex flex-col gap-3 items-center cursor-pointer"
     >
@@ -14,6 +15,7 @@
     </NuxtLink>
 
     <NuxtLink
+      v-if="social?.phone_number"
       :href="`tel:${social?.phone_number}`"
       class="flex flex-col gap-3 items-center cursor-pointer"
     >
@@ -25,6 +27,7 @@
     </NuxtLink>
 
     <NuxtLink
+      v-if="social?.calendar"
       :href="social?.calendar"
       target="_blank"
       class="flex flex-col gap-3 items-center cursor-pointer"
@@ -37,6 +40,7 @@
     </NuxtLink>
 
     <NuxtLink
+      v-if="social?.greeting_text"
       :href="`sms:?&body=${
         social?.greeting_text
           ? social?.greeting_text
@@ -53,6 +57,7 @@
     </NuxtLink>
 
     <NuxtLink
+      v-if="social?.linked_in"
       :href="social?.linked_in"
       target="_blank"
       class="flex flex-col gap-3 items-center cursor-pointer"
@@ -65,6 +70,7 @@
     </NuxtLink>
 
     <NuxtLink
+      v-if="social?.instagram"
       :href="social?.instagram"
       target="_blank"
       class="flex flex-col gap-3 items-center cursor-pointer"
@@ -77,6 +83,7 @@
     </NuxtLink>
 
     <NuxtLink
+      v-if="social?.youtube"
       :href="social?.youtube"
       target="_blank"
       class="flex flex-col gap-3 items-center cursor-pointer"
@@ -90,6 +97,7 @@
     <!-- :class="{ 'hidden': !social?.telegram }" -->
 
     <NuxtLink
+      v-if="social?.telegram"
       :href="social?.telegram"
       target="_blank"
       class="flex flex-col gap-3 items-center cursor-pointer"
@@ -102,6 +110,7 @@
     </NuxtLink>
 
     <NuxtLink
+      v-if="social?.buttons"
       v-for="button in social?.buttons"
       :key="button.id"
       :href="button?.url"
@@ -119,6 +128,19 @@
         class="fa-solid fa-link text-2xl bg-primary hover:bg-hoverColor transition-colors rounded-full w-[55px] h-[55px] grid place-content-center"
       ></i>
       <h5>{{ button?.text }}</h5>
+    </NuxtLink>
+
+    <NuxtLink
+      v-if="social?.whatsapp"
+      :href="`https://wa.me/${social?.whatsapp}`"
+      target="_blank"
+      class="flex flex-col gap-3 items-center cursor-pointer"
+    >
+      <i
+        class="fa-brands fa-whatsapp text-3xl bg-primary hover:bg-hoverColor transition-colors rounded-full w-[55px] h-[55px] grid place-content-center"
+      ></i>
+
+      <h5 class="universal-text">Whatsapp</h5>
     </NuxtLink>
   </div>
 
