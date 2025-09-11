@@ -112,6 +112,7 @@
     <NuxtLink
       v-if="social?.buttons"
       v-for="button in social?.buttons"
+      
       :key="button.id"
       :href="button?.url"
       target="_blank"
