@@ -14,31 +14,31 @@
       <Social />
 
       <!-- About section -->
-      <div v-if="profile.about_event">
+      <div v-if="profile?.about_event">
         <Divider icon-name="fa-solid fa-building" />
         <About />
       </div>
 
       <!-- Clients section -->
-      <div v-if="profile.clients_title">
+      <div v-if="profile?.clients_title">
         <Divider icon-name="fa-solid fa-medal" />
         <Clients />
       </div>
 
       <!-- Works section -->
-      <div v-if="profile.our_projects_title">
+      <div v-if="profile?.our_projects_title">
         <Divider icon-name="fa-solid fa-video" />
         <Works />
       </div>
 
       <!-- About-person section -->
-      <div v-if="profile.about_person">
+      <div v-if="profile?.about_person">
         <Divider icon-name="fa-solid fa-user" />
         <AboutPerson />
       </div>
 
       <!-- Gallery section -->
-      <div v-if="profile.gallery_title">
+      <div v-if="profile?.gallery_title">
         <Divider icon-name="fa-solid fa-images" />
         <Gallery />
       </div>
@@ -74,7 +74,7 @@ const { toggleCard } = appStore;
 const { fetchData } = profileStore;
 
 await useAsyncData(
-	() => `profile-${params.slug}`,
+	`profile-${params.slug}`,
 	() => fetchData(params.slug),
 	{ server: false }
 );
@@ -115,50 +115,51 @@ onMounted(() => {
   );
 });
 
-console.log(profile.value);
+const stripHtml = (html) => html?.replace(/<[^>]+>/g, "") || "";
 
-// Seo
-useHead({
+useHead(() => ({
   title:
-    `${profile?.value?.name} - ${profile?.value?.company_name} | UzbekBusinessConnect` ||
-    "UzbekBusinessConnect",
+    profile.value?.name && profile.value?.company_name
+      ? `${profile.value.name} - ${profile.value.company_name} | UzbekBusinessConnect`
+      : "UzbekBusinessConnect",
   meta: [
     {
       name: "description",
-      content: profile?.value?.about_event.replace(/<[^>]+>/g, "") || "",
+      content: stripHtml(profile.value?.about_event),
     },
     {
       name: "og:title",
       content:
-        `${profile?.value?.name} - ${profile?.value?.company_name} | UzbekBusinessConnect` ||
-        "UzbekBusinessConnect",
+        profile.value?.name && profile.value?.company_name
+          ? `${profile.value.name} - ${profile.value.company_name} | UzbekBusinessConnect`
+          : "UzbekBusinessConnect",
     },
     {
       name: "og:description",
-      content: profile?.value?.about_event.replace(/<[^>]+>/g, "") || "",
+      content: stripHtml(profile.value?.about_event),
     },
-    { name: "og:image", content: profile?.value?.profile_image || "/logo.png" },
+    { name: "og:image", content: profile.value?.profile_image || "/logo.png" },
     { name: "og:image:width", content: "1200" },
     { name: "og:image:height", content: "630" },
     { name: "og:type", content: "website" },
     {
       name: "og:url",
-      content: `https://uzbekbusinessconnect.com/${profile?.value?.slug}`,
+      content: `https://uzbekbusinessconnect.com/${profile.value?.slug || params.slug}`,
     },
     { name: "twitter:card", content: "summary_large_image" },
     {
       name: "twitter:image",
-      content: profile?.value?.profile_image || "/logo.png",
+      content: profile.value?.profile_image || "/logo.png",
     },
   ],
   link: [
     {
       rel: "icon",
       type: "image/x-icon",
-      href: profile?.value?.profile_image || "/default-favicon.ico",
+      href: profile.value?.profile_image || "/default-favicon.ico",
     },
   ],
-});
+}));
 </script>
 
 <style></style>
