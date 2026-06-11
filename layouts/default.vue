@@ -23,7 +23,7 @@ const servicesStore = useServicesStore();
 
 const { locale } = useI18n();
 
-const { refresh } = await useAsyncData(
+await useAsyncData(
 	'layout',
 	async () => {
 		await Promise.allSettled([
@@ -41,16 +41,6 @@ const { refresh } = await useAsyncData(
 			services: servicesStore.services,
 		};
 	},
-	{ watch: [locale] }
+	{ server: false, watch: [locale] }
 );
-
-onMounted(() => {
-	const hasData =
-		Object.keys(translationsStore.translations).length > 0 ||
-		aboutStore.about.length > 0;
-
-	if (!hasData) {
-		refresh();
-	}
-});
 </script>

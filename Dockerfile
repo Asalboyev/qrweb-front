@@ -1,9 +1,18 @@
+FROM node:22-slim AS builder
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
+COPY . .
+RUN npm run build
+
 FROM node:22-slim
 
 WORKDIR /app
 
-COPY .output ./.output
-COPY .env ./
+COPY --from=builder /app/.output ./.output
 
 ENV HOST=0.0.0.0
 ENV PORT=18217

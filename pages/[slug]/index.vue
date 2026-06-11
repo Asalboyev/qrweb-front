@@ -73,8 +73,11 @@ const { profileData: profile, colors, htmlData } = storeToRefs(profileStore);
 const { toggleCard } = appStore;
 const { fetchData } = profileStore;
 
-// Fetch data
-await fetchData(params.slug);
+await useAsyncData(
+	() => `profile-${params.slug}`,
+	() => fetchData(params.slug),
+	{ server: false }
+);
 
 // Update text color based on background color
 function updateTextColor() {

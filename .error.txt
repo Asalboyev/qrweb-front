@@ -1,4 +1,4 @@
-root@theexclusive:/var/www/qrweb/client# docker logs 1a26568acb2a
+root@theexclusive:/var/www/qrweb/client# docker logs 729ca8fb54d2
 Listening on http://0.0.0.0:18217
 AxiosError: connect ETIMEDOUT 176.96.243.232:443
     at AxiosError.from (file:///app/.output/server/node_modules/axios/lib/core/AxiosError.js:92:14)
@@ -906,3 +906,4 @@ AxiosError: connect ETIMEDOUT 176.96.243.232:443
   at process.processTicksAndRejections (node:internal/process/task_queues:103:5)  
   at async renderToString (./.output/server/node_modules/@vue/server-renderer/dist/server-renderer.cjs.prod.js:661:18)  
   at async Object.renderToString$1 [as renderToString] (./.output/server/chunks/routes/renderer.mjs:153:18)
+root@theexclusive:/var/www/qrweb/client# 

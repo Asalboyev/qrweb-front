@@ -5,10 +5,11 @@ services:
     restart: unless-stopped
     ports:
       - "18217:18217"
-    env_file:
-      - .env
     environment:
       - HOST=0.0.0.0
       - PORT=18217
       - NUXT_HOST=0.0.0.0
       - NUXT_PORT=18217
+      - NUXT_PUBLIC_API_BASE_URL=${NUXT_PUBLIC_API_BASE_URL:-https://admin2.uzbekbusinessconnect.com/api}
+      - NUXT_PUBLIC_API_URL=${NUXT_PUBLIC_API_URL:-https://admin.uzbekbusinessconnect.com/api}
+      - NUXT_API_BASE_URL=${NUXT_API_BASE_URL:-https://admin2.uzbekbusinessconnect.com/api}

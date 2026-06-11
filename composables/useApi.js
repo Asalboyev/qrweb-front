@@ -12,7 +12,7 @@ export const useApi = () => {
 	const api = axios.create({
 		baseURL,
 		headers: { 'Content-Type': 'application/json' },
-		timeout: 15_000,
+		timeout: import.meta.server ? 5_000 : 15_000,
 	});
 
 	api.interceptors.request.use(
