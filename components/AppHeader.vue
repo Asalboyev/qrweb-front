@@ -123,7 +123,11 @@
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <a :href="`tel:${about[0].phone_1}`" class="max-lg:hidden">
+        <a
+          v-if="aboutInfo?.phone_1"
+          :href="`tel:${aboutInfo.phone_1}`"
+          class="max-lg:hidden"
+        >
           <Button
             class="bg-white/[0.16] border-white/[0.08] text-white text-base flex gap-2"
           >
@@ -139,7 +143,7 @@
                 fill="white"
               />
             </svg>
-            {{ about[0].phone_1 }}
+            {{ aboutInfo.phone_1 }}
           </Button>
         </a>
 
@@ -166,17 +170,15 @@
 
 <script setup>
 import { useTranslationsStore } from "~/stores/translations.js";
-import { useAboutStore } from "~/stores/about.js";
 
 const dark = ref(false);
 
 const translationsStore = useTranslationsStore();
-const infosStore = useAboutStore();
+const aboutInfo = useAboutInfo();
 
 const { translations } = storeToRefs(translationsStore);
 
 const localePath = useLocalePath();
-const { about } = storeToRefs(infosStore);
 
 const { setLocale, locale } = useI18n();
 

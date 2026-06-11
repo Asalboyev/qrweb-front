@@ -33,9 +33,10 @@ export default defineNuxtConfig({
     vueI18n: "./i18n.config.ts",
   },
   runtimeConfig: {
+    apiBaseUrl: process.env.NUXT_API_BASE_URL || process.env.API_BASE_URL || "https://admin2.uzbekbusinessconnect.com/api",
     public: {
-      API_URL: process.env.API_URL || 'https://admin.uzbekbusinessconnect.com/api',
-      apiBaseUrl: process.env.API_BASE_URL || "https://admin2.uzbekbusinessconnect.com/api",
+      API_URL: process.env.NUXT_PUBLIC_API_URL || process.env.API_URL || 'https://admin.uzbekbusinessconnect.com/api',
+      apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL || process.env.API_BASE_URL || "https://admin2.uzbekbusinessconnect.com/api",
     },
   },
 });

@@ -5,11 +5,15 @@ export const useApi = () => {
 
 	const { locale } = useI18n();
 
-	const api = axios.create({
-		headers: { 'Content-Type': 'application/json' }
-	});
+	const baseURL = import.meta.server
+		? config.apiBaseUrl || config.public.apiBaseUrl
+		: config.public.apiBaseUrl;
 
-	api.defaults.baseURL = config.public.apiBaseUrl;
+	const api = axios.create({
+		baseURL,
+		headers: { 'Content-Type': 'application/json' },
+		timeout: 15_000,
+	});
 
 	api.interceptors.request.use(
 		(config) => {

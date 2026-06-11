@@ -92,7 +92,7 @@
                 translations["form.Social network"]
               }}</span>
               <nav class="flex items-center gap-6">
-                <a :href="about[0].telegram" target="_blank">
+                <a :href="aboutInfo?.telegram" target="_blank">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -106,7 +106,7 @@
                     />
                   </svg>
                 </a>
-                <a :href="about[0].facebook" target="_blank">
+                <a :href="aboutInfo?.facebook" target="_blank">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -120,7 +120,7 @@
                     />
                   </svg>
                 </a>
-                <a :href="about[0].instagram" target="_blank">
+                <a :href="aboutInfo?.instagram" target="_blank">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -141,10 +141,10 @@
                 translations["form.Phone number"]
               }}</span>
               <a
-                :href="`tel:${about[0].phone_1}`"
+                :href="`tel:${aboutInfo?.phone_1}`"
                 target="_blank"
                 class="text-base sm:text-xl font-medium"
-                >{{ about[0].phone_1 }}</a
+                >{{ aboutInfo?.phone_1 }}</a
               >
             </div>
             <div class="flex flex-col min-w-[170px] gap-2">
@@ -165,7 +165,7 @@
               <span class="text-grey-4 text-base">
                 {{ translations["form.For instant communication"] }}
               </span>
-              <span class="text-xl font-medium">{{ about[0].phone_2 }}</span>
+              <span class="text-xl font-medium">{{ aboutInfo?.phone_2 }}</span>
             </div>
             <a
               :href="translations['form.telegram_support']"
@@ -210,21 +210,18 @@
 <script setup>
 import { useTranslationsStore } from "~/stores/translations.js";
 import { useApplication } from "~/stores/application.js";
-import { useAboutStore } from "~/stores/about.js";
-
 import { useToast } from "vue-toast-notification";
 
 const toast = useToast();
 
 const translationsStore = useTranslationsStore();
 const applicationStore = useApplication();
-const infosStore = useAboutStore();
+const aboutInfo = useAboutInfo();
 
 const { orderCreate } = applicationStore;
 const { translations } = storeToRefs(translationsStore);
 
 const { loading } = storeToRefs(applicationStore);
-const { about } = storeToRefs(infosStore);
 
 const form = reactive({
   name: "",

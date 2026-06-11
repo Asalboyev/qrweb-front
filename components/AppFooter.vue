@@ -25,7 +25,7 @@
 					</button>
 					</nav>
 				</div>
-				<a :href="`tel:${about[0].phone_2}`" >
+				<a v-if="aboutInfo?.phone_2" :href="`tel:${aboutInfo.phone_2}`">
 				<Button class="bg-grey-3 text-white flex gap-2">
 					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
 						<path
@@ -33,7 +33,7 @@
 							fill="white"
 						/>
 					</svg>
-					{{about[0].phone_2}}
+					{{ aboutInfo.phone_2 }}
 				</Button>
 			</a>
 			</div>
@@ -66,13 +66,11 @@
 
 <script setup>
 import { useTranslationsStore } from '~/stores/translations.js';
-import { useAboutStore } from '~/stores/about.js';
 
 const translationsStore = useTranslationsStore();
-const infosStore = useAboutStore();
+const aboutInfo = useAboutInfo();
 
 const { translations } = storeToRefs(translationsStore);
-const { about } = storeToRefs(infosStore);
 
 const scrollToSection = (sectionId) => {
 	const section = document.getElementById(sectionId);

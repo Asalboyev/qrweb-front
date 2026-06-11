@@ -71,7 +71,7 @@
         </div>
         <div
           class="text-base sm:text-xl font-semibold"
-          v-html="about[0]?.descriptions"
+          v-html="aboutInfo?.descriptions"
         />
       </div>
     </div>
@@ -80,7 +80,8 @@
         class="bg-transparent border-none shadow-none !max-w-[1000px] flex justify-center"
       >
         <iframe
-          :src="about[0].url"
+          v-if="aboutInfo?.url"
+          :src="aboutInfo.url"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin"
@@ -93,13 +94,10 @@
 
 <script setup>
 import { useTranslationsStore } from "~/stores/translations.js";
-import { useAboutStore } from "~/stores/about.js";
-
 const translationsStore = useTranslationsStore();
-const infosStore = useAboutStore();
+const aboutInfo = useAboutInfo();
 
 const { translations } = storeToRefs(translationsStore);
-const { about } = storeToRefs(infosStore);
 
 const activeVideoModal = ref(false);
 </script>

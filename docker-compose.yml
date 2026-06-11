@@ -1,0 +1,14 @@
+services:
+  qrweb-client:
+    build: .
+    container_name: qrweb-client
+    restart: unless-stopped
+    ports:
+      - "18217:18217"
+    env_file:
+      - .env
+    environment:
+      - HOST=0.0.0.0
+      - PORT=18217
+      - NUXT_HOST=0.0.0.0
+      - NUXT_PORT=18217
